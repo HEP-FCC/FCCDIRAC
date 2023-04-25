@@ -1,0 +1,52 @@
+[Marlin]
+#ApplicationAttributeName=Value
+
+[DDSim]
+#ApplicationAttributeName=Value
+
+[Overlay]
+#ApplicationAttributeName=Value
+
+[Whizard2]
+#ApplicationAttributeName=Value
+
+[KKMC]
+#ApplicationAttributeName=Value
+
+[gaudiapp]
+ExecutableName = k4run
+SteeringFile = geant_fullsim_fccee_lar_pgun.py
+RandomSeedFlag = --SimG4Svc.seedValue
+
+[Production Parameters]
+machine = ee
+prodGroup = several
+
+softwareVersion = key4hep-latest
+
+generatorApplication = gaudiapp
+generatorVersion = key4hep-latest
+
+configVersion = key4hep-devel-2
+configPackage = fccConfig
+eventsPerJobs = 1000
+
+numberOfTasks = 1
+
+campaign = winter2023
+energies = 10
+processes = pi
+detectorModel = idea_lar
+datatype = 
+
+productionLogLevel = VERBOSE
+outputSE = CERN-DIP-4
+
+finalOutputSE = CERN-SRM
+MoveStatus = Stopped
+MoveGroupSize = 10
+
+ProdTypes = Gen
+
+
+

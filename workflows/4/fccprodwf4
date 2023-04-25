@@ -1,0 +1,51 @@
+[Marlin]
+#ApplicationAttributeName=Value
+
+[DDSim]
+#ApplicationAttributeName=Value
+
+[Overlay]
+#ApplicationAttributeName=Value
+
+[Whizard2]
+#ApplicationAttributeName=Value
+
+[KKMC]
+#ApplicationAttributeName=Value
+
+[gaudiapp]
+ExecutableName = k4run
+SteeringFile = k4simdelphesalg_pythia.py
+RandomSeedFlag = --SimG4Svc.seedValue
+Arguments = --Pythia8.PythiaInterface.pythiacard pythia8card.cmd --k4SimDelphesAlg.DelphesCard delphes_card_IDEA.tcl --k4SimDelphesAlg.DelphesOutputSettings edm4hep_output_config.tcl
+
+[Production Parameters]
+machine = ee
+prodGroup = several
+softwareVersion = key4hep-latest
+
+generatorApplication = gaudiapp
+generatorVersion = key4hep-latest
+pythia8CardPath = p8_ee_ggqq_ecm91.cmd, p8_ee_WW_ecm240.cmd, p8_ee_ZH_ecm240.cmd, p8_ee_ZZ_ecm240.cmd
+
+configVersion = key4hep-devel-2
+configPackage = fccConfig
+eventsPerJobs = 1000, 2000, 3000, 1500
+
+numberOfTasks = 1, 1, 1, 1
+
+campaign = winter2023
+energies = 91.18, 240, 240, 240
+processes = qqbar, WW, ZZ, ZH
+detectorModel = idea
+datatype = delphes
+
+productionLogLevel = VERBOSE
+outputSE = CERN-DIP-4
+
+finalOutputSE = CERN-SRM
+MoveStatus = Stopped
+MoveGroupSize = 10
+
+prodids =
+ProdTypes = Gen

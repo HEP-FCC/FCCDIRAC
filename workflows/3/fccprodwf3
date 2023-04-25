@@ -1,0 +1,53 @@
+[Marlin]
+#ApplicationAttributeName=Value
+
+[DDSim]
+#ApplicationAttributeName=Value
+
+[Overlay]
+#ApplicationAttributeName=Value
+
+[Whizard2]
+#ApplicationAttributeName=Value
+
+[KKMC]
+#ApplicationAttributeName=Value
+
+[delphesapp]
+ExecutableName = DelphesPythia8_EDM4HEP
+DetectorCard = delphes_card_IDEA.tcl
+OutputCard = edm4hep_output_config.tcl
+
+[Production Parameters]
+machine = ee
+prodGroup = several
+
+softwareVersion = key4hep-latest
+generatorApplication = delphesapp
+generatorVersion = key4hep-latest
+pythia8CardPath = p8_ee_ggqq_ecm91.cmd
+
+configVersion = key4hep-devel-2
+configPackage = fccConfig
+eventsPerJobs = 1000
+
+numberOfTasks = 1
+
+campaign = winter2023
+energies = 115.4
+processes = qqbar
+detectorModel = idea
+datatype = delphes
+
+productionLogLevel = VERBOSE
+outputSE = CERN-DIP-4
+
+finalOutputSE = CERN-SRM
+MoveStatus = Stopped
+MoveGroupSize = 10
+
+#Productions to create: Gen, Split, Sim, Rec, RecOver
+ProdTypes = Gen
+move = False
+
+
