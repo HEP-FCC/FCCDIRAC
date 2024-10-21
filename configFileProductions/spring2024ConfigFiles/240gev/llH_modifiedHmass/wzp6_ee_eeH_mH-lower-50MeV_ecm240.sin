@@ -20,8 +20,7 @@ sqrts = 240 GeV
 
 #?vis_diags = true
 
-
-process proc = e1, E1 => H, e2, E2
+process proc = e1, E1 => H, e1, E1
 
 beams = e1, E1 => gaussian => isr
 ?keep_beams  = true    # do not use this option, makes Pythia crash
