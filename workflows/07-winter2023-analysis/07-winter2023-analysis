@@ -1,0 +1,142 @@
+#!/bin/env python
+
+'''
+Run FCCAnalyses based analysis with samples from the winter2023 campaign.
+'''
+import os
+import sys
+import shutil
+
+from DIRAC import S_OK, gLogger
+from DIRAC.Core.Base import Script
+
+from ILCDIRAC.Interfaces.API.NewInterface.UserJob import UserJob
+from ILCDIRAC.Interfaces.API.NewInterface import Applications
+from ILCDIRAC.Interfaces.API.DiracILC import DiracILC
+
+
+# -----------------------------------------------------------------------------
+class Params:
+    '''
+    Class to hold the script CLI arguments.
+    '''
+    def __init__(self):
+        self.where = 'local'
+        self.ana_path = '/home/jsmiesko/dirac-workflows/FCCAnalyses/' \
+            'examples/FCCee/higgs/mH-recoil/mumu/analysis_stage1.py'
+        self.fccana_path = '/home/jsmiesko/dirac-workflows/FCCAnalyses'
+        self.energy = '240'
+        self.output_name = 'p8_ee_ZZ_ecm240.root'
+    def run_on_wms(self, _):
+        self.where = 'wms'
+        return S_OK()
+    def run_locally(self, _):
+        self.where = 'local'
+        return S_OK()
+    def ana_script_location(self, path):
+        self.ana_path = path
+        return S_OK()
+    def fccana_location(self, path):
+        self.fccana_path = path
+        return S_OK()
+    def ana_energy(self, energy):
+        self.energy = energy
+    def output_filename(self, name):
+        self.output_name = name
+
+
+def define_job(cli_params):
+    '''
+    The definition of the DIRAC job itself.
+    '''
+    job = UserJob()
+
+    job.setOutputSandbox(['*.log', '*.sh', '*.py', '*.xml'])
+    job.setLogLevel('DEBUG')
+
+    job.setJobGroup('Winter2023_Analysis')
+    job.setName('Run5')
+
+    return job
+
+
+def define_analysis_app(job, cli_params):
+    '''
+    Define the FCCAnalyses application.
+    '''
+
+    if os.path.isdir(cli_params.fccana_path):
+        shutil.copytree(os.path.join(cli_params.fccana_path, 'install'),
+                        os.path.join(os.getcwd(), 'install'),
+                        dirs_exist_ok=True)
+        shutil.copy2(os.path.join(cli_params.fccana_path, 'setup.sh'),
+                     os.getcwd())
+    else:
+        print('ERROR: FCCAnalyses not found!\nAborting...')
+        sys.exit(1)
+
+    if os.path.isfile(cli_params.ana_path):
+        ana_script_name = os.path.basename(cli_params.ana_path)
+        shutil.copy2(cli_params.ana_path, os.getcwd())
+    else:
+        print('ERROR: Analysis script not found!\nAborting...')
+        sys.exit(1)
+
+    input_sandbox = [
+        'install/',
+        'setup.sh',
+        ana_script_name
+    ]
+    job.setInputSandbox(input_sandbox)
+
+    print('input sandbox:')
+    print(input_sandbox)
+
+    job.setOutputData(cli_params.output_name, '', 'CERN-DST-EOS')
+
+    ana_app = Applications.GenericApplication()
+
+    ana_app.setSetupScript('./setup.sh')
+    ana_app.setScript('./install/bin/fccanalysis')
+    ana_app.setArguments(
+        f'run {ana_script_name} --output {cli_params.output_name}'
+    )
+
+    ana_app.setEnergy(cli_params.energy)
+
+    job.append(ana_app)
+
+    return job
+
+
+if __name__ == "__main__":
+    # Setup argument parsing
+    cli_params = Params()
+
+    Script.registerSwitch('w', 'wms', 'Run on DIRAC WMS',
+                          cli_params.run_on_wms)
+    Script.registerSwitch('l', 'local', 'Run locally',
+                          cli_params.run_locally)
+    Script.registerSwitch('a:', 'ana-path=', 'Location of the analysis script',
+                          cli_params.ana_script_location)
+    Script.registerSwitch('f:', 'fccana-path=', 'Location of FCCAnalyses',
+                          cli_params.fccana_location)
+    Script.registerSwitch('e:', 'energy=', 'Center of Mass Energy',
+                          cli_params.ana_energy)
+    Script.registerSwitch('n:', 'output-name=', 'Output ROOT file name',
+                          cli_params.output_name)
+
+    Script.parseCommandLine()
+
+    gLogger.notice('Submitting Workflow 07: Winter2023 Analysis')
+    gLogger.notice(f' - execution location: {cli_params.where}')
+    gLogger.notice(f' - FCCAnalyses location: {cli_params.fccana_path}')
+    gLogger.notice(f' - analysis script location: {cli_params.ana_path}')
+    gLogger.notice(f' - center-of-mass energy: {cli_params.ana_energy}')
+    gLogger.notice(f' - output ROOT file name: {cli_params.output_name}\n')
+
+    job = define_job(cli_params)
+
+    job = define_analysis_app(job, cli_params)
+
+    job.submit(DiracILC(), mode=cli_params.where)
