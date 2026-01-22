@@ -139,4 +139,10 @@ if __name__ == "__main__":
 
     job = define_analysis_app(job, cli_params)
 
-    job.submit(DiracILC(), mode=cli_params.where)
+    res = job.submit(DiracILC(), mode=cli_params.where)
+    if res["OK"]:
+        gLogger.notice('Successfully submitted the job.')
+        gLogger.notice(f'Its ID is: {res["Value"]}')
+    else:
+        gLogger.notice('Failed to submit the job!')
+        gLogger.notice(res["Message"])
