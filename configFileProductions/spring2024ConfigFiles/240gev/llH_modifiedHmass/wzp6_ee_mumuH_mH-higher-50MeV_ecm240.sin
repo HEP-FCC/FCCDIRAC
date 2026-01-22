@@ -11,7 +11,7 @@
 
 model = SM
 
-mH     = 125 GeV
+mH     = 125.05 GeV
 
 # Center of mass energy
 sqrts = 240 GeV

@@ -2,7 +2,7 @@
 #
 # Whizard 3.0.3
 #
-# e e -> mu mu H   (only one diagram, e e -> Z H and Z -> mumu )
+# e e -> e e H   (only one diagram, e e -> Z H and Z -> e e )
 #
 # Hadronisation by Pythia6. Inclusive H decays (by Pythia)
 #
@@ -11,7 +11,7 @@
 
 model = SM
 
-mH     = 125 GeV
+mH     = 125.05 GeV
 
 # Center of mass energy
 sqrts = 240 GeV
@@ -21,7 +21,7 @@ sqrts = 240 GeV
 #?vis_diags = true
 
 
-process proc = e1, E1 => H, e2, E2
+process proc = e1, E1 => H, e1, E1
 
 beams = e1, E1 => gaussian => isr
 ?keep_beams  = true    # do not use this option, makes Pythia crash
