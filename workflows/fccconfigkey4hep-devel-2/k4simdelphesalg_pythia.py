@@ -2,13 +2,13 @@ import os
 from Gaudi.Configuration import *
 from GaudiKernel import SystemOfUnits as units
 
-from Configurables import ApplicationMgr
+from Configurables import ApplicationMgr, EventDataSvc
+from k4FWCore import IOSvc
+
 ApplicationMgr().EvtSel = 'NONE' 
 ApplicationMgr().EvtMax = 10
 
-from Configurables import k4DataSvc
-podioevent = k4DataSvc("EventDataSvc")
-ApplicationMgr().ExtSvc += [podioevent]
+podioevent = EventDataSvc("EventDataSvc")
 
 
 from Configurables import PythiaInterface
@@ -44,7 +44,6 @@ delphesalg.GenParticles.Path = "GenParticles"
 delphesalg.OutputLevel = VERBOSE
 ApplicationMgr().TopAlg += [delphesalg]
 
-from Configurables import PodioOutput
-out = PodioOutput("out", filename = "output_k4SimDelphes_pythia.root")
-out.outputCommands = ["keep *"]
-ApplicationMgr().TopAlg += [out]
+iosvc = IOSvc()
+iosvc.Output = "output_k4SimDelphes_pythia.root"
+iosvc.outputCommands = ["keep *"]
