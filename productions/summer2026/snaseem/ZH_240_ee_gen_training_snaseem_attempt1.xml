@@ -1,0 +1,253 @@
+<Workflow>
+<descr_short></descr_short>
+<description><![CDATA[]]></description>
+<name>ZH_240_ee_gen_training_snaseem_attempt1</name>
+<origin></origin>
+<type></type>
+<version>0.0</version>
+<Parameter name="JobType" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="User specified type"><value><![CDATA[MCGeneration]]></value></Parameter>
+<Parameter name="Priority" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="Priority"><value><![CDATA[1]]></value></Parameter>
+<Parameter name="JobGroup" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="User specified job group"><value><![CDATA[@{PRODUCTION_ID}]]></value></Parameter>
+<Parameter name="JobName" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="Name of Job"><value><![CDATA[Name]]></value></Parameter>
+<Parameter name="StdOutput" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="Standard output file"><value><![CDATA[std.out]]></value></Parameter>
+<Parameter name="StdError" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="Standard error file"><value><![CDATA[std.err]]></value></Parameter>
+<Parameter name="InputData" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="Default null input data value"><value><![CDATA[]]></value></Parameter>
+<Parameter name="LogLevel" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="User specified logging level"><value><![CDATA[VERBOSE]]></value></Parameter>
+<Parameter name="arguments" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Arguments to executable Step"><value><![CDATA[]]></value></Parameter>
+<Parameter name="ParametricInputData" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Default null parametric input data value"><value><![CDATA[]]></value></Parameter>
+<Parameter name="ParametricInputSandbox" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Default null parametric input sandbox value"><value><![CDATA[]]></value></Parameter>
+<Parameter name="Platform" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="Platform ( Operating System )"><value><![CDATA[x86_64-slc5-gcc43-opt]]></value></Parameter>
+<Parameter name="IS_PROD" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="This job is a production job"><value><![CDATA[True]]></value></Parameter>
+<Parameter name="CPUTime" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="CPU time in secs"><value><![CDATA[300000]]></value></Parameter>
+<Parameter name="productionVersion" type="string" linked_module="" linked_parameter="" in="True" out="False" description="ProdAPIVersion"><value><![CDATA[$Id$]]></value></Parameter>
+<Parameter name="PRODUCTION_ID" type="string" linked_module="" linked_parameter="" in="True" out="False" description="ProductionID"><value><![CDATA[00012345]]></value></Parameter>
+<Parameter name="JOB_ID" type="string" linked_module="" linked_parameter="" in="True" out="False" description="ProductionJobID"><value><![CDATA[00012345]]></value></Parameter>
+<Parameter name="emailAddress" type="string" linked_module="" linked_parameter="" in="True" out="False" description="CrashEmailAddress"><value><![CDATA[ilcdirac-support@cern.ch]]></value></Parameter>
+<Parameter name="SoftwarePackages" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="ILC Software Packages to be installed"><value><![CDATA[fccconfig.key4hep-devel-6;delphesapp.key4hep_260408]]></value></Parameter>
+<Parameter name="fccConfigPackage" type="JDL" linked_module="" linked_parameter="" in="True" out="False" description="fccConfigpackage"><value><![CDATA[fccConfigkey4hep-devel-6]]></value></Parameter>
+<Parameter name="Energy" type="float" linked_module="" linked_parameter="" in="True" out="False" description="Energy used"><value><![CDATA[240.0]]></value></Parameter>
+<Parameter name="NbOfEvts" type="int" linked_module="" linked_parameter="" in="True" out="False" description="Number of events to process"><value><![CDATA[100]]></value></Parameter>
+<Parameter name="TotalSteps" type="String" linked_module="" linked_parameter="" in="True" out="False" description="Total number of steps"><value><![CDATA[1]]></value></Parameter>
+<ModuleDefinition>
+<body><![CDATA[from ILCDIRAC.Workflow.Modules.DelphesAppModule import DelphesAppModule
+]]></body>
+<descr_short></descr_short>
+<description><![CDATA[Module to run DelphesApp]]></description>
+<origin></origin>
+<required></required>
+<type>DelphesAppModule</type>
+<version>0.0</version>
+<Parameter name="randomSeed" type="int" linked_module="" linked_parameter="" in="False" out="False" description="Random seed for the generator"><value><![CDATA[0]]></value></Parameter>
+<Parameter name="executableName" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Name of the executable"><value><![CDATA[]]></value></Parameter>
+<Parameter name="detectorCard" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the detector card (e.g. ``delphes_card_IDEA.tcl``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="outputCard" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the output card (e.g. ``edm4hep_output_config.tcl``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="pythia8CardContent" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the pythia8 card (e.g. the content of ``path/p8_ee_ggqq_ecm91.cmd``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenParticleList" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the evtgen particle list file (e.g. ``evt.pdl``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenFullDecay" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the evtgen full decay file (e.g. ``DECAY.DEC``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenDecCardContent" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the evtgen user decay file (e.g. ``user.dec``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenPdgid" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the evtgen particle group (e.g. 511)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenBsignal" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the evtgen signal  (e.g. Ds_SIGNAL)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenDigit" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines # FIXME (e.g. ``1``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="debug" type="bool" linked_module="" linked_parameter="" in="False" out="False" description="debug mode"><value><![CDATA[False]]></value></Parameter>
+</ModuleDefinition>
+<ModuleDefinition>
+<body><![CDATA[from ILCDIRAC.Workflow.Modules.ComputeOutputDataList import ComputeOutputDataList
+]]></body>
+<descr_short></descr_short>
+<description><![CDATA[Compute the output data list to be treated by the last finalization]]></description>
+<origin></origin>
+<required></required>
+<type>ComputeOutputDataList</type>
+<version>0.0</version>
+</ModuleDefinition>
+<ModuleDefinition>
+<body><![CDATA[from ILCDIRAC.Workflow.Modules.UploadOutputData import UploadOutputData]]></body>
+<descr_short></descr_short>
+<description><![CDATA[Uploads the output data]]></description>
+<origin></origin>
+<required></required>
+<type>UploadOutputData</type>
+<version>0.0</version>
+<Parameter name="enable" type="bool" linked_module="" linked_parameter="" in="True" out="False" description="EnableFlag"><value><![CDATA[False]]></value></Parameter>
+</ModuleDefinition>
+<ModuleDefinition>
+<body><![CDATA[from ILCDIRAC.Workflow.Modules.RegisterOutputData import RegisterOutputData]]></body>
+<descr_short></descr_short>
+<description><![CDATA[Module to add in the metadata catalog the relevant info about the files]]></description>
+<origin></origin>
+<required></required>
+<type>RegisterOutputData</type>
+<version>0.0</version>
+<Parameter name="enable" type="bool" linked_module="" linked_parameter="" in="True" out="False" description="EnableFlag"><value><![CDATA[False]]></value></Parameter>
+</ModuleDefinition>
+<ModuleDefinition>
+<body><![CDATA[from ILCDIRAC.Workflow.Modules.UploadLogFile import UploadLogFile]]></body>
+<descr_short></descr_short>
+<description><![CDATA[Uploads the output log files]]></description>
+<origin></origin>
+<required></required>
+<type>UploadLogFile</type>
+<version>0.0</version>
+<Parameter name="enable" type="bool" linked_module="" linked_parameter="" in="True" out="False" description="EnableFlag"><value><![CDATA[False]]></value></Parameter>
+</ModuleDefinition>
+<ModuleDefinition>
+<body><![CDATA[from ILCDIRAC.Workflow.Modules.FailoverRequest import FailoverRequest]]></body>
+<descr_short></descr_short>
+<description><![CDATA[Sends any failover requests]]></description>
+<origin></origin>
+<required></required>
+<type>FailoverRequest</type>
+<version>0.0</version>
+<Parameter name="enable" type="bool" linked_module="" linked_parameter="" in="True" out="False" description="EnableFlag"><value><![CDATA[False]]></value></Parameter>
+</ModuleDefinition>
+<ModuleDefinition>
+<body><![CDATA[from ILCDIRAC.Workflow.Modules.ReportErrors import ReportErrors]]></body>
+<descr_short></descr_short>
+<description><![CDATA[Reports errors at the end]]></description>
+<origin></origin>
+<required></required>
+<type>ReportErrors</type>
+<version>0.0</version>
+</ModuleDefinition>
+<StepDefinition>
+<descr_short></descr_short>
+<description><![CDATA[]]></description>
+<origin></origin>
+<type>delphesapp_step_1</type>
+<version>0.0</version>
+<Parameter name="applicationName" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Application Name"><value><![CDATA[]]></value></Parameter>
+<Parameter name="applicationVersion" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Application Version"><value><![CDATA[]]></value></Parameter>
+<Parameter name="SteeringFile" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Steering File"><value><![CDATA[]]></value></Parameter>
+<Parameter name="applicationLog" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Log File"><value><![CDATA[]]></value></Parameter>
+<Parameter name="ExtraCLIArguments" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Extra CLI arguments"><value><![CDATA[]]></value></Parameter>
+<Parameter name="InputFile" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Input File"><value><![CDATA[]]></value></Parameter>
+<Parameter name="OutputFile" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Output File"><value><![CDATA[]]></value></Parameter>
+<Parameter name="OutputPath" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Output File path on the grid"><value><![CDATA[]]></value></Parameter>
+<Parameter name="outputPathREC" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Output REC File path on the grid"><value><![CDATA[]]></value></Parameter>
+<Parameter name="outputPathDST" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Output DST File path on the grid"><value><![CDATA[]]></value></Parameter>
+<Parameter name="OutputSE" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Output File storage element"><value><![CDATA[]]></value></Parameter>
+<Parameter name="listoutput" type="list" linked_module="" linked_parameter="" in="False" out="False" description="list of output file name"><value><![CDATA[[]]]></value></Parameter>
+<Parameter name="ForgetInput" type="boolean" linked_module="" linked_parameter="" in="False" out="False" description="Do not overwrite input steering"><value><![CDATA[False]]></value></Parameter>
+<ModuleInstance>
+<descr_short></descr_short>
+<name>delphesapp_step_1</name>
+<type>DelphesAppModule</type>
+<Parameter name="randomSeed" type="int" linked_module="" linked_parameter="" in="False" out="False" description="Random seed for the generator"><value><![CDATA[-1]]></value></Parameter>
+<Parameter name="executableName" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Name of the executable"><value><![CDATA[DelphesPythia8_EDM4HEP]]></value></Parameter>
+<Parameter name="detectorCard" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the detector card (e.g. ``delphes_card_IDEA.tcl``)"><value><![CDATA[card_IDEA.tcl]]></value></Parameter>
+<Parameter name="outputCard" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the output card (e.g. ``edm4hep_output_config.tcl``)"><value><![CDATA[edm4hep_IDEA.tcl]]></value></Parameter>
+<Parameter name="pythia8CardContent" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the pythia8 card (e.g. the content of ``path/p8_ee_ggqq_ecm91.cmd``)"><value><![CDATA[Random:setSeed = on
+Main:numberOfEvents = 1000         ! number of events to generate
+Main:timesAllowErrors = 5          ! how many aborts before run stops
+
+
+! 2) Settings related to output in init(), next() and stat().
+Init:showOneParticleData = 25
+
+Init:showChangedSettings = on      ! list changed settings
+Init:showChangedParticleData = off ! list changed particle data
+Next:numberCount = 100             ! print message every n events
+Next:numberShowInfo = 20            ! print event information n times
+Next:numberShowProcess = 20         ! print process record n times
+Next:numberShowEvent =  20          ! print event record n times
+
+Beams:idA = 11                   ! first beam, e+ = 11
+Beams:idB = -11                   ! second beam, e- = -11
+
+! Vertex smearing :
+Beams:allowVertexSpread = on
+Beams:sigmaVertexX = 9.70e-3   !  13.7 mum / sqrt2
+Beams:sigmaVertexY = 25.5E-6   !  36.1 nm / sqrt2
+Beams:sigmaVertexZ = 0.64      !  0.64 mm
+
+
+! 3) Hard process : ZH at 240 GeV
+Beams:eCM = 240.  ! CM energy of collision
+HiggsSM:ffbar2HZ = on
+
+! 4) Settings for the event generation process in the Pythia8 library.
+PartonLevel:ISR = on               ! initial-state radiation
+PartonLevel:FSR = on               ! final-state radiation
+
+ParticleDecays:limitCylinder = on
+ParticleDecays:xyMax = 2250.
+ParticleDecays:zMax = 2500.
+
+! 5) Non-standard settings; exemplifies tuning possibilities.
+25:m0        = 125.0               ! Higgs mass
+
+]]></value></Parameter>
+<Parameter name="evtGenParticleList" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the evtgen particle list file (e.g. ``evt.pdl``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenFullDecay" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the evtgen full decay file (e.g. ``DECAY.DEC``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenDecCardContent" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the evtgen user decay file (e.g. ``user.dec``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenPdgid" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the evtgen particle group (e.g. 511)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenBsignal" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines the evtgen signal  (e.g. Ds_SIGNAL)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="evtGenDigit" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Flag that defines # FIXME (e.g. ``1``)"><value><![CDATA[]]></value></Parameter>
+<Parameter name="debug" type="bool" linked_module="" linked_parameter="" in="False" out="False" description="debug mode"><value><![CDATA[False]]></value></Parameter>
+</ModuleInstance>
+<ModuleInstance>
+<descr_short></descr_short>
+<name>delphesapp_step_1</name>
+<type>ComputeOutputDataList</type>
+</ModuleInstance>
+</StepDefinition>
+<StepDefinition>
+<descr_short></descr_short>
+<description><![CDATA[]]></description>
+<origin></origin>
+<type>Job_Finalization</type>
+<version>0.0</version>
+<ModuleInstance>
+<descr_short></descr_short>
+<name>dataUpload</name>
+<type>UploadOutputData</type>
+<Parameter name="enable" type="bool" linked_module="" linked_parameter="" in="True" out="False" description="EnableFlag"><value><![CDATA[True]]></value></Parameter>
+</ModuleInstance>
+<ModuleInstance>
+<descr_short></descr_short>
+<name>RegisterOutputData</name>
+<type>RegisterOutputData</type>
+<Parameter name="enable" type="bool" linked_module="" linked_parameter="" in="True" out="False" description="EnableFlag"><value><![CDATA[True]]></value></Parameter>
+</ModuleInstance>
+<ModuleInstance>
+<descr_short></descr_short>
+<name>logUpload</name>
+<type>UploadLogFile</type>
+<Parameter name="enable" type="bool" linked_module="" linked_parameter="" in="True" out="False" description="EnableFlag"><value><![CDATA[True]]></value></Parameter>
+</ModuleInstance>
+<ModuleInstance>
+<descr_short></descr_short>
+<name>failoverRequest</name>
+<type>FailoverRequest</type>
+<Parameter name="enable" type="bool" linked_module="" linked_parameter="" in="True" out="False" description="EnableFlag"><value><![CDATA[True]]></value></Parameter>
+</ModuleInstance>
+<ModuleInstance>
+<descr_short></descr_short>
+<name>reportErrors</name>
+<type>ReportErrors</type>
+</ModuleInstance>
+</StepDefinition>
+<StepInstance>
+<descr_short></descr_short>
+<name>delphesapp_step_1</name>
+<type>delphesapp_step_1</type>
+<Parameter name="applicationName" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Application Name"><value><![CDATA[delphesapp]]></value></Parameter>
+<Parameter name="applicationVersion" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Application Version"><value><![CDATA[key4hep_260408]]></value></Parameter>
+<Parameter name="SteeringFile" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Steering File"><value><![CDATA[]]></value></Parameter>
+<Parameter name="applicationLog" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Log File"><value><![CDATA[delphesapp_key4hep_260408_@{STEP_ID}.log]]></value></Parameter>
+<Parameter name="ExtraCLIArguments" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Extra CLI arguments"><value><![CDATA[]]></value></Parameter>
+<Parameter name="InputFile" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Input File"><value><![CDATA[]]></value></Parameter>
+<Parameter name="OutputFile" type="string" linked_module="" linked_parameter="" in="False" out="False" description="Output File"><value><![CDATA[ZH_delphes.root]]></value></Parameter>
+<Parameter name="OutputPath" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Output File path on the grid"><value><![CDATA[/fcc/ee/summer2026/240gev/ZH/IDEA/delphes]]></value></Parameter>
+<Parameter name="outputPathREC" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Output REC File path on the grid"><value><![CDATA[]]></value></Parameter>
+<Parameter name="outputPathDST" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Output DST File path on the grid"><value><![CDATA[]]></value></Parameter>
+<Parameter name="OutputSE" type="string" linked_module="" linked_parameter="" in="True" out="False" description="Output File storage element"><value><![CDATA[CERN-DST-EOS]]></value></Parameter>
+<Parameter name="listoutput" type="list" linked_module="" linked_parameter="" in="False" out="False" description="list of output file name"><value><![CDATA[[{'outputFile': '@{OutputFile}', 'outputPath': '@{OutputPath}', 'outputDataSE': '@{OutputSE}'}]]]></value></Parameter>
+<Parameter name="ForgetInput" type="boolean" linked_module="" linked_parameter="" in="False" out="False" description="Do not overwrite input steering"><value><![CDATA[False]]></value></Parameter>
+</StepInstance>
+<StepInstance>
+<descr_short></descr_short>
+<name>finalization</name>
+<type>Job_Finalization</type>
+</StepInstance>
+</Workflow>
