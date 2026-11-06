@@ -1,0 +1,34 @@
+********************** THIS IS INPUT FILE FOR DEMO PROGRAM *********************
+*  This is input data for CEEX matrix element
+BeginX
+********************************************************************************
+*               ACTUAL DATA FOR THIS PARTICULAR RUN
+*-------------------------------------------------------------------------------
+*indx_____data______ccccccccc0cccc__________General_____ccc0ccccccccc0ccccccccc0
+    0           1000      1k   NEVT = number of events, OBSOLETE!!!
+* Center-of-mass energy [GeV]
+    1        91.2e0      CMSene =xpar( 1) Average Center of mass energy [GeV]
+*     PrintOut from generator
+    5           1  LevPri =xpar( 5)  PrintOut Level 0,1,2,3
+    6              1        Ie1Pri =xpar( 6)  PrintOut Start point
+    7              5        Ie2Pri =xpar( 7)  PrintOut End   point
+   25              0      KeyBES BES, =0 none, =1 Gaussian, =2 Beamstrahlung (Linear Collider case, CIRCE parametrization)
+********************************************************************************
+**     Define process
+**     Beam flavour code
+  400             11      KFini = xpar(400) dont change it                |<<<<|
+  415              1      KFfin, tau
+*********************  Tau decays ***********************************************
+ 2001              162     Jak1,  all inclusive
+ 2002                0      Jak2,  all inclusive
+*****   PhotosC adding photons in tau decays in HEPMC3 event record
+   35              0   KeyPhts =0 for off; =1 in non-leptonic; =2 in all decays
+********************************************************************************
+********************************************************************************
+*
+********************************************************************************
+** The initial random generator seed (set by the KKMCee shell script)
+ 3020       123456789      Ranmar initial random number seed (KKMC and FOAM)
+********************************************************************************
+*
+EndX
