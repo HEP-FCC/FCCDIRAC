@@ -1,0 +1,20 @@
+Creating task with meta {'ProdID': '1', 'EvtType': 'ZH', 'Energy': '240', 'Machine': 'ee'}
+Creating task with meta {'ProdID': '1', 'EvtType': 'ZH', 'Energy': '240', 'Machine': 'ee', 'NumberOfEvents': 100}
+********************************************************************************
+Creating generation production: ZH_240_ee_gen_training_snaseem_attempt1 
+delphesapp: setting option ExecutableName to DelphesPythia8_EDM4HEP
+delphesapp: setting option DetectorCard to card_IDEA.tcl
+delphesapp: setting option OutputCard to edm4hep_IDEA.tcl
+delphesapp: setting option Version to key4hep_260408
+Found config parameter ['fccConfigPackage']
+Field `Beams:eCM` found in your pythia card, Assuming it is a pythia card for generating new events.
+Found in the pythia card a line containing a value compatible with the energy chosen for the process. Good.
+Energy path is:  240gev/
+Adding output meta data for <class 'ILCDIRAC.Interfaces.API.NewInterface.Applications.DelphesApp.DelphesApp'>
+Will store the files under /fcc/ee/summer2026/240gev/ZH/IDEA/delphes
+Created transformation 17146
+Setting metadata information:  /fcc/ee/summer2026/240gev/ZH/IDEA/delphes/00017146: {'ProdID': 17146, 'NumberOfEvents': 100}
+Setting non searchable metadata information:  /fcc/ee/summer2026/240gev/ZH/IDEA/delphes/00017146: {'SWPackages': 'delphesapp.key4hep_260408'}
+Creating task with meta {'Energy': '240', 'EvtType': 'ZH', 'Campaign': 'summer2026', 'DetectorType': 'IDEA', 'Datatype': 'delphes', 'ProdID': 17146}
+********************************************************************************
+Not creating moving transformation for prodID: 17146, MCGeneration 
