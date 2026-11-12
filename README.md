@@ -448,9 +448,9 @@ For any questions or any further informations, please contact us at : fcc-experi
 
 work in progress
 
-### Workflow 2 - KKMC and k4SimDelphes in Gaudi
+### [Workflow 2 - KKMC and k4SimDelphes in Gaudi](workflows/2)
 
-work in progress
+[Preliminary LFV tau-to-mu-gamma configurations and validation](workflows/2/lfv).
 
 ### [Workflow 3 - Pythia8 and k4SimDelphes in Delphes standalone](https://github.com/HEP-FCC/FCCDIRAC/tree/master/workflows/3)
 
